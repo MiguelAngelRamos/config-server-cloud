@@ -1,6 +1,6 @@
-server:
-  port: 8888
 spring:
+  profiles:
+    active: default
   application:
     name: config-server
   cloud:
@@ -9,3 +9,13 @@ spring:
         git:
           uri: https://github.com/MiguelAngelRamos/config-server-msv
           default-label: main # Rama predeterminada
+          clone-on-start: true
+server:
+  port: 8888
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
